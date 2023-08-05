@@ -1,9 +1,13 @@
 package POM;
 
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class AppElements {
     AndroidDriver driver;
@@ -11,18 +15,19 @@ public class AppElements {
         this.driver=driver;
     }
     By Click = By.xpath("//*[@text='Make Payment']");
-    By Number =By.xpath("//*[@id='phoneTextField']");
-    By Name =By.xpath("//*[@id='nameTextField']");
-    By Amount =By.xpath("//*[@id='amountTextField']");
-    By Country =By.xpath("//*[@id='countryTextField']");
+    By Number =By.xpath("//*[@text='Phone']");
+    By Name =By.xpath("//*[@text='Name']");
+    By Amount =By.xpath("//*[@text='Amount']");
+    By Country =By.xpath("//*[@text='Country']");
     By Payment =By.xpath("//*[@text='Send Payment']");
-    By Mortgage=By.xpath("//*[@text='Mortgage Request']");
-    By FirstName= By.xpath("//*[@id='nameTextField']");
-    By LastName= By.xpath("//*[@id='lastNameTextField']");
-    By ages= By.xpath("//*[@id='ageTextField']");
-    By Adress=By.xpath("//*[@id='addressOneTextField']");
-    By Adresss = By.xpath("//*[@id='addressTwoTextField']");
-    By Countries = By.xpath("//*[@id='countryTextField']");
+    By Mortgage =By.xpath("//*[@text='Mortgage Request']");
+    By Mot = By.xpath("//*[@text='Mortgage Request']");
+    By FirstName= By.xpath("//*[@text='First Name']");
+    By LastName= By.xpath("//*[@text='Last Name']");
+    By ages= By.xpath("//*[@text='Age']");
+    By Adress=By.xpath("//*[@text='Address 1']");
+    By Adresss = By.xpath("//*[@text='Address 2']");
+    By Countries = By.xpath("//*[@text='Country']");
     By Next = By.xpath("//*[@text='Next']");
     By Loan = By.xpath("//*[@text='Home']");
     By Years = By.xpath("//*[@text='1']");
@@ -79,10 +84,11 @@ public class AppElements {
             driver.findElement(Payment).click();
             Thread.sleep(1000);
             driver.findElement(By.xpath("//*[@text='Yes']")).click();
-        }
-        public void Mortgage()throws InterruptedException{
             Thread.sleep(1000);
-            driver.findElement(Mortgage).click();
+        }
+        public void mot()throws InterruptedException{
+            Thread.sleep(1000);
+        driver.findElement(Mot).click();
         }
         public void Names(String F,String L) throws InterruptedException{
             Thread.sleep(1000);
@@ -112,6 +118,18 @@ public class AppElements {
             driver.findElement(Countries).click();
             driver.findElement(Countries).sendKeys(c);
             Thread.sleep(1000);
+            int startX = 282;
+            int startY = 413;
+            int endX = 282;
+            int endY = 268;
+            int duration = 618;
+
+            TouchAction touchAction = new TouchAction(driver);
+            touchAction.press(PointOption.point(startX, startY))
+                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(duration)))
+                    .moveTo(PointOption.point(endX, endY))
+                    .release()
+                    .perform();
             driver.findElement(Next).click();
             Thread.sleep(1000);
         }
@@ -121,9 +139,13 @@ public class AppElements {
                 Thread.sleep(1000);
             driver.findElement(Years).click();
             //scroll code
+
                 Thread.sleep(1000);
             driver.findElement(job).click();
+           // driver.switchTo();
+            driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"50,00,000\"));"));
                 Thread.sleep(1000);
+
             driver.findElement(income).click();
 
         }

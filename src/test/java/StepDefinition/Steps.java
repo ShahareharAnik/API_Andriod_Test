@@ -11,8 +11,8 @@ import org.openqa.selenium.By;
 import java.net.MalformedURLException;
 
 public class Steps {
-    AndroidDriver driver;
-    public static  AppElements elements;
+    static AndroidDriver driver;
+    AppElements elements;
     @Given("app apk is there")
     public void appApkIsThere() throws MalformedURLException, InterruptedException {
         AppHelper helper= new AppHelper();
